@@ -1,0 +1,41 @@
+name: check_kafka
+services:
+  produce:
+    container_name: produce
+    image: test_kafka
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: python prod1.py
+    networks:
+      - services
+    restart: always
+    volumes:
+      - ./:/app/
+    tty: true
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+
+  consume:
+    container_name: consume
+    image: test_kafka
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: python consumer.py
+    networks:
+      - services
+    restart: always
+    volumes:
+      - ./:/app/
+    tty: true
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+
+networks:
+  services:
+    external: true

@@ -1,0 +1,23 @@
+name: mongodb
+services:
+  mongo:
+    container_name: mongodb
+    image: mongo:latest
+    ports:
+      - '27017:27017'
+    user: root:root
+    volumes:
+      - ${HOME}/.mongo_storage:/data/db:rw,z
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+    restart: always
+    networks:
+      - services
+
+volumes:
+  mongo:
+
+
+networks:
+  services:
+    external: true

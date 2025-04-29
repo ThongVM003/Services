@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Beca-Streaming Service</title>
+</head>
+
+<body>
+    <img id="video" src="" alt="/AIOT/object_counting" />
+
+    <script>
+        const videoElement = document.getElementById('video');
+        const socket = new WebSocket('ws://180.148.0.215:8063/AIOT/object_counting');  // WebSocket server address
+
+        socket.binaryType = 'arraybuffer'; // Set the binaryType to 'arraybuffer'
+
+        socket.onopen = function () {
+            console.log('WebSocket connection established');
+        };
+
+        socket.onerror = function (error) {
+            console.error('WebSocket error:', error);
+        };
+
+        socket.onclose = function (event) {
+            console.log('WebSocket connection closed:', event);
+        };
+
+        socket.onmessage = function (event) {
+            console.log('WebSocket message received:', event);
+            const arrayBuffer = event.data;
+            const blob = new Blob([arrayBuffer], { type: 'image/jpeg' });
+            const previousBlobURL = videoElement.src;
+            URL.revokeObjectURL(previousBlobURL);
+
+            const url = URL.createObjectURL(blob);
+            videoElement.src = url;
+        };
+    </script>
+</body>
+
+</html>
