@@ -2,7 +2,6 @@ name: minio
 services:
   minio:
     container_name: minio
-
     ports:
       - "9000:9000"
       - "9001:9001"
@@ -12,16 +11,24 @@ services:
     command: server /data --console-address ":9001" --ftp="address=:8021" --ftp="passive-port-range=30000-30100"
     environment:
       - MINIO_ROOT_USER=ghost
-      - MINIO_ROOT_PASSWORD=12345678
+      - MINIO_ROOT_PASSWORD=Tabi9982
     restart: always
     user: root:root
     volumes:
-      - ~/.minio/data:/data:rw,z
+      - minio:/data:rw,z
       # - /home/thinh/.minio/certs:/root/.minio/certs:rw,z
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
     networks:
       - services
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+
+volumes:
+  minio:
+    name: minio_data
 
 networks:
   services:

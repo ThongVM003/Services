@@ -9,8 +9,17 @@ services:
     networks:
       - services
     volumes:
+      - redis:/data:rw,z
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+
+volumes:
+  redis:
+    name: redis_data
 
 networks:
   services:

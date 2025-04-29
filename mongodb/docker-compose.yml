@@ -7,16 +7,24 @@ services:
       - '27017:27017'
     user: root:root
     volumes:
-      - ${HOME}/.mongo_storage:/data/db:rw,z
+      - mongo:/data/db:rw,z
+      - config:/data/configdb:rw,z
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
     restart: always
     networks:
       - services
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
 
 volumes:
   mongo:
+    name: mongo_data
 
+  config:
+    name: mongo_config
 
 networks:
   services:

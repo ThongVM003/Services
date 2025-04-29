@@ -1,7 +1,7 @@
 name: 'apache-kafka'
 services:
   broker:
-    image: confluentinc/cp-kafka:7.6.1
+    image: confluentinc/cp-kafka:latest
     hostname: becamex
     container_name: kafka
     ports:
@@ -41,7 +41,7 @@ services:
       - /etc/timezone:/etc/timezone:ro
 
   schema-registry:
-    image: confluentinc/cp-schema-registry:7.6.1
+    image: confluentinc/cp-schema-registry:latest
     hostname: schema-registry
     container_name: schema-registry
     depends_on:
@@ -63,7 +63,7 @@ services:
       - /etc/timezone:/etc/timezone:ro
 
   connect:
-    image: cnfldemos/cp-server-connect-datagen:0.6.4-7.6.0
+    image: cnfldemos/cp-server-connect-datagen:latest
     hostname: connect
     container_name: connect
     depends_on:
@@ -103,7 +103,7 @@ services:
       - /etc/timezone:/etc/timezone:ro
 
   control-center:
-    image: confluentinc/cp-enterprise-control-center:7.6.1
+    image: confluentinc/cp-enterprise-control-center:latest
     hostname: control-center
     container_name: control-center
     depends_on:
@@ -137,7 +137,7 @@ services:
       - /etc/timezone:/etc/timezone:ro
 
   ksqldb-server:
-    image: confluentinc/cp-ksqldb-server:7.6.1
+    image: confluentinc/cp-ksqldb-server:latest
     hostname: ksqldb-server
     container_name: ksqldb-server
     depends_on:
@@ -170,7 +170,7 @@ services:
       - /etc/timezone:/etc/timezone:ro
 
   ksqldb-cli:
-    image: confluentinc/cp-ksqldb-cli:7.6.1
+    image: confluentinc/cp-ksqldb-cli:latest
     container_name: ksqldb-cli
     depends_on:
       - broker
@@ -187,7 +187,7 @@ services:
       - services
 
   ksql-datagen:
-    image: confluentinc/ksqldb-examples:7.6.1
+    image: confluentinc/ksqldb-examples:latest
     hostname: ksql-datagen
     container_name: ksql-datagen
     depends_on:
@@ -213,7 +213,7 @@ services:
       - /etc/timezone:/etc/timezone:ro
 
   rest-proxy:
-    image: confluentinc/cp-kafka-rest:7.6.1
+    image: confluentinc/cp-kafka-rest:latest
     depends_on:
       - broker
       - schema-registry

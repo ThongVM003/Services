@@ -28,7 +28,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
-    restart: unless-stopped8004/dashboard
+    restart: unless-stopped
     environment:
       - AGENT_PORT=9444
     networks:

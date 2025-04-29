@@ -9,10 +9,10 @@ services:
       - ETCD_QUOTA_BACKEND_BYTES=4294967296
       - ETCD_SNAPSHOT_COUNT=50000
     volumes:
-      - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/etcd:/etcd
+      - etcd:/etcd
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
-    command: etcd -advertise-client-urls=http://127.0.0.1:2379 -listen-client-urls http://0.0.0.0:2379 --data-dir /etcd
+    command: etcd -advertise-client-urls=http://100.106.39.74:2379 -listen-client-urls http://0.0.0.0:2379 --data-dir /etcd
     healthcheck:
       test: [ "CMD", "etcdctl", "endpoint", "health" ]
       interval: 30s
@@ -21,25 +21,29 @@ services:
     restart: unless-stopped
     networks:
       - services
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
 
   standalone:
     container_name: milvus-standalone
-    image: milvusdb/milvus:v2.3.0
+    image: milvusdb/milvus:latest
     command: [ "milvus", "run", "standalone" ]
     security_opt:
       - seccomp:unconfined
     environment:
       ETCD_ENDPOINTS: etcd:2379
-      MINIO_ADDRESS: 192.168.103.252:9000
+      MINIO_ADDRESS: 100.106.39.74:8060
       MINIO_ACCESS_KEY_ID: becamex
       MINIO_SECRET_ACCESS_KEY: becamex@123
       MINIO_BUCKET_NAME: facefeatures
     volumes:
-      - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus
+      - milvus:/var/lib/milvus
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:9091/health" ]
+      test: [ "CMD", "curl", "-f", "http://100.106.39.74:9091/health" ]
       interval: 30s
       start_period: 90s
       timeout: 20s
@@ -52,12 +56,16 @@ services:
     restart: unless-stopped
     networks:
       - services
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
 
   attu:
     container_name: milvus-attu
     image: zilliz/attu:latest
     environment:
-      MILVUS_URL: 192.168.103.219:19530
+      MILVUS_URL: 100.106.39.74:19530
     ports:
       - "8770:3000"
     restart: unless-stopped
@@ -68,6 +76,16 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+
+volumes:
+  milvus:
+    name: milvus_data
+  etcd:
+    name: etcd_data
 
 networks:
   services:
