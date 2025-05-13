@@ -7,7 +7,7 @@ run-portainer:
 	@docker compose -f portainer/docker-compose.yml up portainer -d
 
 run-portainer-agent:
-	@docker compose -f portainer/docker-compose.yml up portainer-agent -d
+	@docker compose -f portainer/docker-compose.yml up portainer_agent -d
 
 run-kafka-broker:
 	@docker compose -f kafka/docker-compose.yml up broker -d
@@ -40,7 +40,7 @@ update-portainer:
 	@docker compose -f portainer/docker-compose.yml up portainer -d --pull always
 
 update-portainer-agent:
-	@docker compose -f portainer/docker-compose.yml up portainer-agent -d --pull always
+	@docker compose -f portainer/docker-compose.yml up portainer_agent -d --pull always
 
 update-kafka-broker:
 	@docker compose -f kafka/docker-compose.yml up broker -d --pull always
@@ -106,7 +106,7 @@ restart-portainer:
 	@docker compose -f portainer/docker-compose.yml restart portainer
 
 restart-portainer-agent:
-	@docker compose -f portainer/docker-compose.yml restart portainer-agent
+	@docker compose -f portainer/docker-compose.yml restart portainer_agent
 
 restart-kafka-broker:
 	@docker compose -f kafka/docker-compose.yml restart broker
@@ -139,7 +139,7 @@ logs-portainer:
 	@docker compose -f portainer/docker-compose.yml logs -f --tail 1000 portainer
 
 logs-portainer-agent:
-	@docker compose -f portainer/docker-compose.yml logs -f --tail 1000 portainer-agent
+	@docker compose -f portainer/docker-compose.yml logs -f --tail 1000 portainer_agent
 
 logs-kafka-broker:
 	@docker compose -f kafka/docker-compose.yml logs -f --tail 1000 broker
@@ -172,7 +172,7 @@ rm-portainer:
 	@docker compose -f portainer/docker-compose.yml down portainer
 
 rm-portainer-agent:
-	@docker compose -f portainer/docker-compose.yml down portainer-agent
+	@docker compose -f portainer/docker-compose.yml down portainer_agent
 
 rm-kafka-broker:
 	@docker compose -f kafka/docker-compose.yml down broker
