@@ -34,10 +34,10 @@ services:
       - seccomp:unconfined
     environment:
       ETCD_ENDPOINTS: etcd:2379
-      MINIO_ADDRESS: 100.106.39.74:8060
-      MINIO_ACCESS_KEY_ID: becamex
-      MINIO_SECRET_ACCESS_KEY: becamex@123
-      MINIO_BUCKET_NAME: facefeatures
+      MINIO_ADDRESS: 100.106.39.74:9000
+      MINIO_ACCESS_KEY_ID: ghost
+      MINIO_SECRET_ACCESS_KEY: Tabi9982
+      MINIO_BUCKET_NAME: milvus
     volumes:
       - milvus:/var/lib/milvus
       - /etc/localtime:/etc/localtime:ro

@@ -73,7 +73,7 @@ stop-portainer:
 	@docker compose -f portainer/docker-compose.yml stop portainer
 
 stop-portainer-agent:
-	@docker compose -f portainer/docker-compose.yml stop portainer-agent
+	@docker compose -f portainer/docker-compose.yml stop portainer_agent
 
 stop-kafka-broker:
 	@docker compose -f kafka/docker-compose.yml stop broker
