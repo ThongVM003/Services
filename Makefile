@@ -27,8 +27,11 @@ run-mongodb:
 run-redis:
 	@docker compose -f redis/docker-compose.yml up -d
 
+run-postgres:
+	@docker compose -f postgres/docker-compose.yml up -d
+
 # Command to start all services
-run-all: run-portainer run-portainer-agent run-kafka-broker run-kafka-all run-milvus-all run-minio run-mongodb run-redis
+run-all: run-portainer run-portainer-agent run-kafka-broker run-kafka-all run-milvus-all run-minio run-mongodb run-redis run-postgres
 
 
 # ============================
@@ -60,8 +63,11 @@ update-mongodb:
 update-redis:
 	@docker compose -f redis/docker-compose.yml up -d --pull always
 
+update-postgres:
+	@docker compose -f postgres/docker-compose.yml up -d --pull always
+
 # Command to update all services
-update-all: update-portainer update-portainer-agent update-kafka-broker update-kafka-all update-milvus-all update-minio update-mongodb update-redis
+update-all: update-portainer update-portainer-agent update-kafka-broker update-kafka-all update-milvus-all update-minio update-mongodb update-redis update-postgres
 
 
 # ============================
@@ -93,8 +99,11 @@ stop-mongodb:
 stop-redis:
 	@docker compose -f redis/docker-compose.yml stop
 
+stop-postgres:
+	@docker compose -f postgres/docker-compose.yml stop
+
 # Command to stop all services
-stop-all: stop-portainer stop-portainer-agent stop-kafka-broker stop-kafka-all stop-milvus-all stop-minio stop-mongodb stop-redis
+stop-all: stop-portainer stop-portainer-agent stop-kafka-broker stop-kafka-all stop-milvus-all stop-minio stop-mongodb stop-redis stop-postgres
 
 
 # ============================
@@ -126,8 +135,11 @@ restart-mongodb:
 restart-redis:
 	@docker compose -f redis/docker-compose.yml restart
 
+restart-postgres:
+	@docker compose -f postgres/docker-compose.yml restart
+
 # Command to restart all services
-restart-all: restart-portainer restart-portainer-agent restart-kafka-broker restart-kafka-all restart-milvus-all restart-minio restart-mongodb restart-redis
+restart-all: restart-portainer restart-portainer-agent restart-kafka-broker restart-kafka-all restart-milvus-all restart-minio restart-mongodb restart-redis restart-postgres
 
 
 # ============================
@@ -159,8 +171,11 @@ logs-mongodb:
 logs-redis:
 	@docker compose -f redis/docker-compose.yml logs -f --tail 1000
 
+logs-postgres:
+	@docker compose -f postgres/docker-compose.yml logs -f --tail 1000
+
 # Command to view logs for all services
-logs-all: logs-portainer logs-portainer-agent logs-kafka-broker logs-kafka-all logs-milvus-all logs-minio logs-mongodb logs-redis
+logs-all: logs-portainer logs-portainer-agent logs-kafka-broker logs-kafka-all logs-milvus-all logs-minio logs-mongodb logs-redis logs-postgres
 
 
 # ============================
@@ -192,5 +207,8 @@ rm-mongodb:
 rm-redis:
 	@docker compose -f redis/docker-compose.yml down
 
+rm-postgres:
+	@docker compose -f postgres/docker-compose.yml down
+
 # Command to remove all services
-rm-all: rm-portainer rm-portainer-agent rm-kafka-broker rm-kafka-all rm-milvus-all rm-minio rm-mongodb rm-redis
+rm-all: rm-portainer rm-portainer-agent rm-kafka-broker rm-kafka-all rm-milvus-all rm-minio rm-mongodb rm-redis rm-postgres
